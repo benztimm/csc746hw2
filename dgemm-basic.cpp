@@ -8,5 +8,15 @@ const char* dgemm_desc = "Basic implementation, three-loop dgemm.";
  */
 void square_dgemm(int n, double* A, double* B, double* C) 
 {
-   // insert your code here: implementation of basic matrix multiple
+    for (int i = 0; i < n; ++i) 
+    {
+        for (int j = 0; j < n; ++j) 
+        {
+            double cij = C[i + j*n]; // C is in column-major format
+            for (int k = 0; k < n; ++k) 
+            {
+                cij += A[i + k*n] * B[k + j*n]; // A and B are in column-major format
+            }
+            C[i + j*n] = cij;}
+    }
 }
